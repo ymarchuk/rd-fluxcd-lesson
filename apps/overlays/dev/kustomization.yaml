@@ -1,0 +1,20 @@
+resources:
+  - ../../base
+  - namespace.yaml
+  - dragonfly.yaml
+
+namespace: development
+
+namePrefix: dev-
+
+commonLabels:
+  environment: development
+
+patches:
+  - target:
+      kind: Deployment
+      name: goapp
+    patch: |
+      - op: replace
+        path: /spec/replicas
+        value: 1

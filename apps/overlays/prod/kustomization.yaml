@@ -1,0 +1,30 @@
+resources:
+  - ../../base
+  - namespace.yaml
+  - dragonfly.yaml
+  - hpa.yaml
+
+namespace: production
+
+namePrefix: prod-
+
+commonLabels:
+  environment: production
+
+patches:
+  - target:
+      kind: Deployment
+      name: goapp
+    patch: |
+      - op: replace
+        path: /spec/replicas
+        value: 3
+      - op: add
+        path: /spec/template/spec/containers/0/resources
+        value:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "500m"
+            memory: "256Mi"

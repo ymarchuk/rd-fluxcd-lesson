@@ -4,7 +4,7 @@ metadata:
   name: production
   namespace: flux-system
 spec:
-  interval: 59m
+  interval: 1m
   path: ./overlays/prod
   prune: true
   sourceRef:
